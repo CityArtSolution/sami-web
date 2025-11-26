@@ -1,0 +1,47 @@
+# Auto generated / build files
+/public/css/*
+!/public/css/.gitkeep
+
+/public/js/*.js*
+!/public/js/.gitkeep
+
+/public/js/core/*
+!/public/js/core/.gitkeep
+
+/public/js/iqonic-script/*.min.js*
+!/public/js/iqonic-script/.gitkeep
+!/public/js/setting-init.js
+
+/public/mix-manifest.json
+
+# Uploaded images (user uploads)
+/public/profile_images/*
+!/public/profile_images/.gitkeep
+
+# Laravel generated storage
+/public/storage
+/storage/*
+/storage/media-library/**/*
+/storage/framework/*
+/storage/logs/*
+
+# Dependencies
+/node_modules
+/vendor
+
+# Env files
+.env
+.env.backup
+
+# IDE / Cache / OS
+/.idea
+/.vscode
+*.cache
+.DS_Store
+npm-debug.log
+yarn-error.log
+.phpunit.result.cache
+
+# Other unwanted
+git-filter-repo
+.well-known.zip
