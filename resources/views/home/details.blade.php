@@ -8,101 +8,194 @@
     <link rel="stylesheet" href="{{ asset('custom-css/frontend.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/lama-sans" rel="stylesheet">
-
-     <meta charset="UTF-8">
     <title>Spa Booking - حجز السبا</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap");
+
+        body {
+            font-family: "Almarai", sans-serif;
+            background: #faf7f2;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .package-container {
+            width: 90%;
+            margin: 40px auto;
+            display: flex;
+            overflow: hidden;
+            border-radius: 20px;
+            background: white;
+            box-shadow: 0px 10px 40px rgba(0,0,0,0.15);
+            animation: fadeUp 1.2s ease-out;
+        }
+        
+        .left-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            animation: zoomIn 3s ease-in-out infinite alternate;
+        }
+        
+        .left-img {
+            flex: 1;
+            overflow: hidden;
+        }
+        
+        .right-box {
+            flex: 1;
+            background: #c88d2a;
+            padding: 45px;
+            color: white;
+            animation: slideRight 1.3s ease-out;
+            position: relative;
+        }
+        
+        .title {
+            font-size: 20px;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        .main-title {
+            font-size: 32px;
+            margin: 10px 0 15px;
+            opacity: 0;
+            color:white;
+            animation: fadeIn 1.3s ease forwards;
+        }
+        
+        .stars span {
+            font-size: 20px;
+            margin: 0 3px;
+            animation: pulse 1.5s infinite;
+        }
+        
+        .desc {
+            margin: 20px 0;
+            opacity: 0;
+            animation: fadeIn 1.5s ease forwards;
+        }
+        
+        .price, .branch {
+            margin: 15px 0;
+            font-size: 18px;
+            opacity: 0;
+            animation: fadeIn 1.7s ease forwards;
+        }
+        
+        .book-btn {
+            margin-top: 25px;
+            padding: 12px 40px;
+            background: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.4s;
+            opacity: 0;
+            animation: fadeIn 1.9s ease forwards, popBtn 1.5s ease infinite alternate;
+        }
+        
+        .book-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255,255,255,0.6);
+        }
+        
+        
+        /* 🎬 Animations */
+        
+        @keyframes fadeUp {
+            from { transform: translateY(40px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes slideRight {
+            from { transform: translateX(60px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes zoomIn {
+            from { transform: scale(1); }
+            to { transform: scale(1.08); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.3); opacity: 1; }
+        }
+        
+        @keyframes popBtn {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.06); }
+        }
+
+    </style>
 </head>
 <body>
-    <!-- Lightning Progress Bar -->
-    @include('components.frontend.progress-bar')
-
     <div class="position-relative" style="height: 17vh;">
         @include('components.frontend.second-navbar')
     </div>
-<main class="container" style="margin-top: -60px; z-index: 2; position: relative;">
-    <!-- Title and Booking Button -->
+    <div class="package-container">
+        <div class="right-box">
+            <h3 class="title">{{ __('messages.Our special packages') }}</h3>
+            <h1 class="main-title">{{ $package['name'][app()->getLocale()] ?? '' }}</h1>
 
-    <!-- Language Toggle Button -->
-    <button id="languageToggle" class="language-toggle">
-        <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"/>
-            <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/>
-            <path d="M2 12h20"/>
-        </svg>
-        <span id="toggleText">English</span>
-    </button>
+            <div class="stars">
+                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+            </div>
+            <div class="desc">
+                <p>{{ __('branch.lbl_description') }} :</p>
+                <ul>
+                    <li>{{  $package['description']  }}</li>
+                </ul>
+            </div>
+            <div class="desc">
+                <p>{{ __('messagess.prices_and_services') }} :</p>
+                @foreach($services as $service)
+                    <div class="service-card">
+                        <div class="card-content">
+                            <h3>{{  $service->service_name }}</h3>
+                            <p class="duration">{{ __('messagess.duration', ['minutes' => $service->duration_min]) }}</p>
+                            <p class="service-price">SR {{ $service->discounted_price }}</p>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
 
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="hero-overlay"></div>
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-title">
-                    <svg class="sparkle" width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0l1.5 5.5L19 6l-5.5 1.5L12 13l-1.5-5.5L5 6l5.5-1.5L12 0z"/>
-                    </svg>
-                    <h1>{{ $package['name'][app()->getLocale()] ?? '' }}</h1>
-                    <svg class="sparkle" width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0l1.5 5.5L19 6l-5.5 1.5L12 13l-1.5-5.5L5 6l5.5-1.5L12 0z"/>
-                    </svg>
-                </div>
-
-               
-<div class="price-display" style="background-color: #bf9456;">
-<p class="original-price">{{ __('messagess.original_price', ['price' => $totalServicePrice]) }}</p>
-<p class="discount-price">{{ __('messagess.discounted_price', ['price' => $totalService]) }}</p>
-                </div>
-
+            <p class="branch"><strong>{{ $branchName }} </strong> : {{ $branchDes }}</p>
+            <p class="price"><strong style="color:white">{{ __('messagess.price') }} :</strong>  {{$totalService}} </p>
+            <div style="width:100%;display: flex;justify-content: end;">
+                <button id="openModalBtn" class="more-btn">{{ __('messagess.bookNow') }}</button>
             </div>
         </div>
-        <div class="wave-bottom">
-            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="..." fill="currentColor"></path>
-            </svg>
-        </div>
-    </section><!-- Services Section -->
-<section class="services-section">
-    <div class="container">
-       <h2>{{ __('messagess.prices_and_services') }}</h2>
-
-@foreach($services as $service)
-    <div class="service-card">
-        <div class="card-content">
-            <h3>{{  $service->service_name }}</h3>
-            <p class="duration">{{ __('messagess.duration', ['minutes' => $service->duration_min]) }}</p>
-            <p class="service-price">SR {{ $service->discounted_price }}</p>
+        <div class="left-img">
+            <img src="https://jospa.tayasmart.com/storage/300/0cUfqsEYatF88HRZiaxJW6FSGyquwNxrVxQybpon.png" alt=""> <!-- temp -->
         </div>
     </div>
-@endforeach
-
-<div class="total-price mt-4">
-    <h4>{{ __('messagess.total_price', ['price' => $totalService]) }}</h4>
-</div>
-
-    </div>
-</section>
-
-
-    <!-- Booking Section -->
-    <section class="booking-section">
-        <div class="container">
+    
+    <!-- المودال -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
             <div class="booking-card">
                 <div class="card-header">
-<h2>{{ __('messagess.book_package') }}</h2>
+                    <h2>{{ __('messagess.book_package') }}</h2>
                 </div>
                 <div class="card-content">
                     <form id="bookingForm">
                         <div class="form-field">
-<label class="form-label">{{ __('messagess.select_date') }}</label>
+                            <label class="form-label">{{ __('messagess.select_date') }}</label>
                             <input type="date" id="dateInput" class="form-input" required>
                         </div>
-
+    
                         <div class="form-field">
-<label class="form-label">{{ __('messagess.select_time') }}</label>
+                            <label class="form-label">{{ __('messagess.select_time') }}</label>
                             <select id="timeSelect" class="form-select" required>
                                 <option value="">اختر الوقت</option>
                                 <option value="09:00">09:00</option>
@@ -116,450 +209,115 @@
                                 <option value="18:00">18:00</option>
                             </select>
                         </div>
-
+    
                         <div class="form-field">
-<label class="form-label">{{ __('messagess.notes') }}</label>
+                            <label class="form-label">{{ __('messagess.notes') }}</label>
                             <textarea id="notesTextarea" class="form-textarea" rows="4" placeholder="أضف أي ملاحظات خاصة..."></textarea>
                         </div>
-
+    
                         <button type="submit" class="submit-button">
-    {{ __('messagess.send_request') }}
-</button>
-
+                            {{ __('messagess.send_request') }}
+                        </button>
                     </form>
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Toast Notification -->
-    <div id="toastNotification" class="toast-notification">
-        <div class="toast-content">
-            <svg class="toast-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M9 12l2 2 4-4"/>
-                <circle cx="12" cy="12" r="10"/>
-            </svg>
-            <div class="toast-text">
-                <h4>تم إرسال طلب الخدمة</h4>
-                <p>سيتم التواصل معك قريباً لتأكيد الموعد</p>
-            </div>
-        </div>
-    </div>
-</main>
-
-    <!-- Pricing Modal -->
-    <div class="modal fade" id="pricingModal" tabindex="-1" aria-labelledby="pricingModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="pricingModalLabel"> Services & Pricing</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body" style="max-height: 400px; overflow-y: auto;">
-          
-          </div>
-        </div>
-      </div>
     </div>
 
-    @include('components.frontend.footer')
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- CSS المودال -->
+    <style>
+    .modal {
+        display: none; /* مخفي افتراضي */
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 41px;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background: rgba(0,0,0,0.5);
+    }
+    
+    .modal-content {
+        background-color: #fff;
+        margin: 80px auto;
+        padding: 20px;
+        border-radius: 15px;
+        width: 90%;
+        max-width: 500px;
+        position: relative;
+    }
+    
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 24px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    
+    .book-btn {
+        background: #ff6b6b;
+        color: #fff;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 10px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+    
+    .book-btn:hover {
+        background: #ff4c4c;
+    }
+    
+    .submit-button {
+        background: #28a745;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+    
+    .submit-button:hover {
+        background: #218838;
+    }
+    </style>
+
+    <!-- JS المودال -->
     <script>
-        const translations = {
-    ar: {
-        packageTitle: "الباقة الثالثة",
-        originalPrice: "السعر الأصلي: SR 3048",
-        discountPrice: "السعر بعد الخصم: SR 2000",
-        servicesTitle: "الأسعار & الخدمات",
-        service1Title: "خدمات الحمام الغربي",
-        service1Duration: "لمدة 60 دقائق",
-        service2Title: "خدمات الحمام الغربي",
-        service2Duration: "لمدة 60 دقائق",
-        service3Title: "خدمات الحمام الغربي",
-        service3Duration: "لمدة 60 دقائق",
-        bookingTitle: "احجز الباقة الآن",
-        dateLabel: "اختيار التاريخ",
-        timeLabel: "اختيار الوقت",
-        timePlaceholder: "اختر الوقت",
-        notesLabel: "ملاحظات",
-        notesPlaceholder: "أضف أي ملاحظات خاصة...",
-        submitButton: "طلب الخدمة",
-        toggleText: "English",
-        toastTitle: "تم إرسال طلب الخدمة",
-        toastMessage: "سيتم التواصل معك قريباً لتأكيد الموعد"
-    },
-    en: {
-        packageTitle: "Package Three",
-        originalPrice: "Original Price: SR 3048",
-        discountPrice: "Discounted Price: SR 2000",
-        servicesTitle: "Prices & Services",
-        service1Title: "Western Bath Services",
-        service1Duration: "60 minutes duration",
-        service2Title: "Western Bath Services",
-        service2Duration: "60 minutes duration",
-        service3Title: "Western Bath Services",
-        service3Duration: "60 minutes duration",
-        bookingTitle: "Book Package Now",
-        dateLabel: "Choose Date",
-        timeLabel: "Choose Time",
-        timePlaceholder: "Select time",
-        notesLabel: "Notes",
-        notesPlaceholder: "Add any special notes...",
-        submitButton: "Request Service",
-        toggleText: "العربية",
-        toastTitle: "Service Request Submitted",
-        toastMessage: "We will contact you soon to confirm your appointment"
-    }
-};
-
-// Application state
-let currentLanguage = 'ar';
-let isFormSubmitting = false;
-
-// DOM element references
-const elements = {
-    html: document.documentElement,
-    body: document.body,
-    languageToggle: document.getElementById('languageToggle'),
-    toggleText: document.getElementById('toggleText'),
-    bookingForm: document.getElementById('bookingForm'),
-    dateInput: document.getElementById('dateInput'),
-    timeSelect: document.getElementById('timeSelect'),
-    notesTextarea: document.getElementById('notesTextarea'),
-    submitButton: document.getElementById('submitButton'),
-    toast: document.getElementById('toastNotification')
-};
-
-// Initialize the application
-function initializeApp() {
-    console.log('Initializing spa booking app...');
-    setupDateConstraints();
-    updateLanguageDisplay();
-    attachEventListeners();
-    addScrollAnimations();
-    console.log('App initialized successfully');
-}
-
-// Setup date input constraints
-function setupDateConstraints() {
-    const today = new Date().toISOString().split('T')[0];
-    elements.dateInput.setAttribute('min', today);
-}
-
-// Attach all event listeners
-function attachEventListeners() {
-    // Language toggle
-    elements.languageToggle.addEventListener('click', handleLanguageToggle);
+    const modal = document.getElementById('bookingModal');
+    const openBtn = document.getElementById('openModalBtn');
+    const closeBtn = document.querySelector('.close-btn');
     
-    // Form submission
-    elements.bookingForm.addEventListener('submit', handleFormSubmission);
-    
-    // Date validation
-    elements.dateInput.addEventListener('change', validateDateInput);
-    
-    // Toast dismissal
-    elements.toast.addEventListener('click', hideToast);
-    
-    // Keyboard shortcuts
-    document.addEventListener('keydown', handleKeyboardShortcuts);
-    
-    console.log('Event listeners attached');
-}
-
-// Handle language toggle with smooth transition
-function handleLanguageToggle() {
-    console.log('Toggling language from', currentLanguage);
-    
-    // Add transition effect
-    elements.body.style.transition = 'opacity 0.3s ease';
-    elements.body.style.opacity = '0.7';
-    
-    setTimeout(() => {
-        currentLanguage = currentLanguage === 'ar' ? 'en' : 'ar';
-        updateLanguageDisplay();
-        
-        elements.body.style.opacity = '1';
-        setTimeout(() => {
-            elements.body.style.transition = '';
-        }, 300);
-        
-        console.log('Language changed to', currentLanguage);
-    }, 150);
-}
-
-// Update all language-dependent content
-function updateLanguageDisplay() {
-    const content = translations[currentLanguage];
-    const isRTL = currentLanguage === 'ar';
-    
-    // Update HTML attributes
-    elements.html.setAttribute('lang', currentLanguage);
-    elements.html.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
-    
-    // Update all text content
-    updateTextContent('packageTitle', content.packageTitle);
-    updateTextContent('originalPrice', content.originalPrice);
-    updateTextContent('discountPrice', content.discountPrice);
-    updateTextContent('servicesTitle', content.servicesTitle);
-    updateTextContent('service1Title', content.service1Title);
-    updateTextContent('service1Duration', content.service1Duration);
-    updateTextContent('service2Title', content.service2Title);
-    updateTextContent('service2Duration', content.service2Duration);
-    updateTextContent('service3Title', content.service3Title);
-    updateTextContent('service3Duration', content.service3Duration);
-    updateTextContent('bookingTitle', content.bookingTitle);
-    updateTextContent('dateLabel', content.dateLabel);
-    updateTextContent('timeLabel', content.timeLabel);
-    updateTextContent('timePlaceholder', content.timePlaceholder);
-    updateTextContent('notesLabel', content.notesLabel);
-    updateTextContent('submitButton', content.submitButton);
-    updateTextContent('toggleText', content.toggleText);
-    updateTextContent('toastTitle', content.toastTitle);
-    updateTextContent('toastMessage', content.toastMessage);
-    
-    // Update placeholder text
-    elements.notesTextarea.placeholder = content.notesPlaceholder;
-    
-    console.log('Language display updated for', currentLanguage);
-}
-
-// Helper function to update text content safely
-function updateTextContent(elementId, text) {
-    const element = document.getElementById(elementId);
-    if (element) {
-        element.textContent = text;
-    } else {
-        console.warn(`Element with id '${elementId}' not found`);
-    }
-}
-
-// Handle form submission with validation and loading state
-async function handleFormSubmission(event) {
-    event.preventDefault();
-    
-    if (isFormSubmitting) {
-        console.log('Form submission already in progress');
-        return;
+    openBtn.onclick = () => {
+        modal.style.display = 'block';
     }
     
-    console.log('Processing form submission...');
-    
-    // Get form data
-    const formData = new FormData(elements.bookingForm);
-    const bookingData = {
-        date: formData.get('date') || elements.dateInput.value,
-        time: formData.get('time') || elements.timeSelect.value,
-        notes: formData.get('notes') || elements.notesTextarea.value,
-        language: currentLanguage,
-        timestamp: new Date().toISOString()
-    };
-    
-    // Validate required fields
-    if (!bookingData.date || !bookingData.time) {
-        const message = currentLanguage === 'ar' ? 
-            'يرجى اختيار التاريخ والوقت' : 
-            'Please select date and time';
-        alert(message);
-        console.log('Form validation failed: missing date or time');
-        return;
+    closeBtn.onclick = () => {
+        modal.style.display = 'none';
     }
     
-    // Show loading state
-    isFormSubmitting = true;
-    elements.bookingForm.classList.add('loading');
-    
-    try {
-        // Simulate API call
-        await simulateAPICall(bookingData);
-        
-        // Show success toast
-        showToast();
-        
-        // Reset form
-        elements.bookingForm.reset();
-        
-        console.log('Booking submitted successfully:', bookingData);
-        
-    } catch (error) {
-        console.error('Form submission error:', error);
-        const errorMessage = currentLanguage === 'ar' ? 
-            'حدث خطأ، يرجى المحاولة مرة أخرى' : 
-            'An error occurred, please try again';
-        alert(errorMessage);
-    } finally {
-        // Hide loading state
-        isFormSubmitting = false;
-        elements.bookingForm.classList.remove('loading');
-    }
-}
-
-// Simulate API call for booking submission
-function simulateAPICall(bookingData) {
-    return new Promise((resolve) => {
-        // Simulate network delay
-        setTimeout(() => {
-            console.log('API call completed for booking:', bookingData);
-            resolve(bookingData);
-        }, 2000);
-    });
-}
-
-// Validate date input to prevent past dates
-function validateDateInput() {
-    const selectedDate = elements.dateInput.value;
-    const today = new Date().toISOString().split('T')[0];
-    
-    if (selectedDate && selectedDate < today) {
-        const message = currentLanguage === 'ar' ? 
-            'لا يمكن اختيار تاريخ في الماضي' : 
-            'Cannot select a date in the past';
-        alert(message);
-        elements.dateInput.value = '';
-        console.log('Invalid date selected:', selectedDate);
-    }
-}
-
-// Show toast notification
-function showToast() {
-    elements.toast.classList.add('show');
-    console.log('Toast notification shown');
-    
-    // Auto-hide after 5 seconds
-    setTimeout(() => {
-        hideToast();
-    }, 5000);
-}
-
-// Hide toast notification
-function hideToast() {
-    elements.toast.classList.remove('show');
-    console.log('Toast notification hidden');
-}
-
-// Handle keyboard shortcuts
-function handleKeyboardShortcuts(event) {
-    // Close toast with Escape key
-    if (event.key === 'Escape' && elements.toast.classList.contains('show')) {
-        event.preventDefault();
-        hideToast();
-    }
-    
-    // Toggle language with Ctrl+L
-    if (event.ctrlKey && event.key === 'l') {
-        event.preventDefault();
-        handleLanguageToggle();
-    }
-}
-
-// Add scroll-triggered animations
-function addScrollAnimations() {
-    // Check if IntersectionObserver is supported
-    if ('IntersectionObserver' in window) {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in-up');
-                    observer.unobserve(entry.target); // Only animate once
-                }
-            });
-        }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        });
-        
-        // Observe service cards
-        document.querySelectorAll('.service-card').forEach(card => {
-            observer.observe(card);
-        });
-        
-        // Observe booking form
-        const bookingCard = document.querySelector('.booking-card');
-        if (bookingCard) {
-            observer.observe(bookingCard);
+    window.onclick = (event) => {
+        if (event.target == modal) {
+            modal.style.display = 'none';
         }
-        
-        console.log('Scroll animations initialized');
-    } else {
-        console.log('IntersectionObserver not supported, skipping scroll animations');
     }
-}
-
-// Handle responsive behavior
-function handleResize() {
-    const isMobile = window.innerWidth < 768;
-    elements.body.classList.toggle('mobile', isMobile);
-    console.log('Responsive handler triggered, mobile:', isMobile);
-}
-
-// Debounce function for performance
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// Network status handling
-function handleOnlineStatus() {
-    const isOnline = navigator.onLine;
-    console.log('Network status changed:', isOnline ? 'online' : 'offline');
     
-    if (!isOnline) {
-        const message = currentLanguage === 'ar' ? 
-            'تم فقدان الاتصال بالإنترنت' : 
-            'Internet connection lost';
-        alert(message);
-    }
-}
-
-// Enhanced error handling
-window.addEventListener('error', (event) => {
-    console.error('JavaScript error occurred:', event.error);
-});
-
-window.addEventListener('unhandledrejection', (event) => {
-    console.error('Unhandled promise rejection:', event.reason);
-});
-
-// Setup all event listeners when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM content loaded, starting initialization...');
-    
-    // Initialize the application
-    initializeApp();
-    
-    // Setup additional event listeners
-    window.addEventListener('resize', debounce(handleResize, 250));
-    window.addEventListener('online', handleOnlineStatus);
-    window.addEventListener('offline', handleOnlineStatus);
-    
-    // Initial responsive check
-    handleResize();
-    
-    console.log('Application fully loaded and ready');
-});
-
-// Expose some functions globally for debugging
-window.spaBookingApp = {
-    toggleLanguage: handleLanguageToggle,
-    showToast,
-    hideToast,
-    getCurrentLanguage: () => currentLanguage,
-    getCurrentFormData: () => {
-        return {
-            date: elements.dateInput.value,
-            time: elements.timeSelect.value,
-            notes: elements.notesTextarea.value
-        };
-    }
-};
+    // ممكن تضيف هنا ajax للفورم لو عايز ترسل البيانات بدون reload
+    document.getElementById('bookingForm').addEventListener('submit', function(e){
+        e.preventDefault();
+        alert('تم إرسال الطلب!'); // مؤقت
+        modal.style.display = 'none';
+    });
     </script>
+
+    <div style="height:21vh;"></div>
+    
+    @include('components.frontend.footer')
     <style>
         /* Reset and Base Styles */
 * {
@@ -598,20 +356,6 @@ window.spaBookingApp = {
     --radius: 0.5rem;
 }
 
-
-body {
-    font-family: 'Lama Sans', sans-serif !important;
-    font-style: {{ app()->getLocale() == 'ar' ? 'italic !important' : 'normal !important' }};
-    background-color: hsl(var(--background));
-    color: hsl(var(--foreground));
-    line-height: 1.6;
-}
-
-/* Arabic font support */
-[dir="rtl"] {
-font-family: 'Lama Sans', sans-serif !important;
-    font-style: {{ app()->getLocale() == 'ar' ? 'italic !important' : 'normal !important' }};
-}
 
 /* Container */
 .container {
@@ -762,23 +506,6 @@ font-family: 'Lama Sans', sans-serif !important;
     margin: 0 auto;
 }
 
-.service-card {
-    background: linear-gradient(145deg, hsl(var(--card)), hsl(var(--spa-blue-light)));
-    border-radius: 0.75rem;
-    box-shadow: 0 4px 20px -4px hsl(var(--spa-blue) / 0.15);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
-}
-
-.service-card:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 10px 40px -10px hsl(var(--spa-teal) / 0.3);
-}
-
-.card-content {
-    padding: 1.5rem;
-    text-align: center;
-}
 
 .service-card h3 {
     font-size: 1.125rem;
@@ -787,31 +514,11 @@ font-family: 'Lama Sans', sans-serif !important;
     color: hsl(var(--card-foreground));
 }
 
-.service-card .duration {
-    color: hsl(var(--muted-foreground));
-    margin-bottom: 0.75rem;
-    font-size: 0.875rem;
-}
-
-.service-price {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: hsl(var(--primary));
-    margin: 0;
-}
 
 /* Booking Section - exact from React version */
 .booking-section {
     padding: 4rem 0;
     background: hsl(var(--muted) / 0.3);
-}
-
-.booking-card {
-    max-width: 400px;
-    margin: 0 auto;
-    background: hsl(var(--card));
-    border-radius: 0.75rem;
-    box-shadow: 0 10px 40px -10px hsl(var(--spa-teal) / 0.3);
 }
 
 .card-header {
@@ -827,7 +534,7 @@ font-family: 'Lama Sans', sans-serif !important;
 }
 
 .card-content {
-    padding: 1.5rem;
+    padding: 0.5rem;
 }
 
 .form-field {
@@ -1035,10 +742,6 @@ font-family: 'Lama Sans', sans-serif !important;
         padding: 3rem 0;
     }
     
-    .booking-card {
-        margin: 0 1rem;
-    }
-    
     .toast-notification {
         top: 1rem;
         right: 1rem;
@@ -1077,6 +780,69 @@ font-family: 'Lama Sans', sans-serif !important;
 .gap-4 {
     gap: 19.5px !important;
 }
+    </style>
+    <style>
+        .service-card {
+            max-height: 112px;
+            margin: 10px 0;
+            flex: 1 1 calc(50% - 10px);
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 10px 15px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .service-card h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .service-card .duration {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .service-card .service-price {
+            font-size: 15px;
+            font-weight: 700;
+            color: #ff6b6b;
+            margin-top: 5px;
+        }
+        
+        .right-box .branch, 
+        .right-box .price {
+            margin-top: 15px;
+            font-size: 15px;
+        }
+        .more-btn{
+            border: none;
+            margin-top: 66px;
+            width: 60%;
+            height: 55px;
+            background-color: white;
+            border-radius: 28px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .more-btn::before {
+            content: "";
+            position: absolute;
+            width: 96%;
+            height: 80%;
+            border: 2px solid #CF9233;
+            border-radius: 28px;
+        }
     </style>
 </body>
 </html>

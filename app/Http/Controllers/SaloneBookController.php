@@ -17,9 +17,16 @@ class SaloneBookController extends Controller
 
     public function show($id)
     {
-        // جلب بيانات الباكيج
-        $package = DB::table('packages')->where('id', $id)->first();
-    
+     $package = DB::table('packages')
+        ->leftJoin('branches', 'packages.branch_id', '=', 'branches.id')
+        ->select(
+            'packages.*',
+            'branches.name as branch_name',
+            'branches.description as branch_description'  // جلب وصف الفرع
+        )
+        ->where('packages.id', $id)
+        ->first();
+
         if (!$package) {
             abort(404, 'Package not found');
         }
@@ -53,7 +60,9 @@ class SaloneBookController extends Controller
 
         $totalServicePrice = $services->sum('service_price');
         $totalService = $services->sum('discounted_price');
-    
-        return view('home.details', compact('package', 'services', 'totalServicePrice','totalService'));
+        $branchDes = $package['branch_description'] ?? '';
+        $branchName = json_decode($package['branch_name'], true)[$currentLocale] ?? '';
+
+        return view('home.details', compact('package', 'services', 'totalServicePrice','totalService',  'branchDes' , 'branchName'));
     }
 }    
