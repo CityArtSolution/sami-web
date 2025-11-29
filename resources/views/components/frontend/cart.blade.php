@@ -76,7 +76,11 @@
       text-align: center;
     }
     .table {
-        font-size: 14px;
+        @if(app()->getLocale() == 'en')
+            font-size: 11px;
+        @else
+            font-size: 14px;
+        @endif
         border-collapse: separate;
         border-spacing: 0 25px;
     }

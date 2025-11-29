@@ -1,3 +1,7 @@
+ @php
+    use App\Models\Branch;
+    $branches = Branch::where('status' , 1)->get();
+@endphp
  <style>
         * {
             margin: 0;
@@ -301,59 +305,47 @@
         <div class="footer-grid">
             <!-- Branches -->
             <div class="footer-column">
-                <h5>عناوين الفروع</h5>
-                <p>الفرع الرئيسي - الرياض</p>
-                <p>طريق الملك عبدالله - مقابل الجامعة</p>
-                <p><i class="bi bi-telephone-fill"></i> 0555666777</p>
-                <p style="margin-top: 15px;">فرع جدة - حي الروضة</p>
-                <p><i class="bi bi-telephone-fill"></i> 0555666888</p>
+                <h5>{{ __('messagess.Branch Addresses') }}</h5>
+                @foreach($branches as $branch)
+                    <p>{{$branch->name}}</p>
+                    <p>{{ $branch->description ?? '' }}</p>
+                    <p><i class="bi bi-telephone-fill"></i>{{$branch->contact_number}}</p>
+                @endforeach
             </div>
 
             <!-- Help -->
             <div class="footer-column">
-                <h5>مساعدة</h5>
-                <p><a href="#" class="footer-link">اتصل بنا</a></p>
-                <p><a href="#" class="footer-link">الشكاوي والمقترحات</a></p>
-                <p><a href="{{ route('frontend.TermsAndConditions') }}" class="footer-link">سياسة الخصوصية</a></p>
-                <p><a href="{{ route('frontend.TermsAndConditions') }}" class="footer-link">الشروط والأحكام</a></p>
+                <h5>{{ __('messagess.Help') }}</h5>
+                <p><a href="{{ route('frontend.contact') }}" class="footer-link">{{ __('messagess.nav_contact') }}</a></p>
+                <p><a href="{{ route('frontend.TermsAndConditions') }}" class="footer-link">{{ __('messagess.Privacy Policy') }}</a></p>
+                <p><a href="{{ route('frontend.TermsAndConditions') }}" class="footer-link">{{ __('messagess.Terms & Conditions') }}</a></p>
             </div>
 
             <!-- About SAMI -->
             <div class="footer-column">
-                <h5>عن سامي</h5>
-                <p>الصفحة الرئيسية</p>
-                <p>عننا</p>
-                <p>خدماتنا</p>
-                <p>فروعنا</p>
-                <p>باقاتنا</p>
+                <h5>{{ __('messagess.about Sami') }}</h5>
+                <p><a href="{{ route('frontend.home') }}" class="footer-link">{{ __('messagess.nav_home') }}</a></p>
+                <p><a href="{{ route('frontend.about') }}" class="footer-link">{{ __('messagess.nav_about') }}</a></p>
+                <p><a href="{{ route('frontend.services') }}" class="footer-link">{{ __('messagess.nav_services') }}</a></p>
+                <p><a href="{{ route('frontend.branches') }}" class="footer-link">{{ __('messagess.our_branches') }}</a></p>
+                <p><a href="{{ route('frontend.Packages') }}" class="footer-link">{{ __('messagess.nav_package') }}</a></p>
             </div>
 
             <!-- Join Us -->
-           <div class="footer-column">
-    <h5>انضم معنا لآخر العروض</h5>
-    
-    <!-- حقل الرقم + زر انضم -->
-    <div class="subscription-form" style="justify-content: center;">
-        <div class="input-wrapper">
-            <input type="tel" class="subscription-input" placeholder="+966" id="phoneInput" dir="ltr">
-            <button class="join-btn" onclick="joinOffers()">انضم</button>
-        </div>
-    </div>
-
-    <!-- زر واتساب منفصل -->
-    <button class="whatsapp-btn full-width" onclick="subscribeWhatsApp()">
-        <i class="bi bi-whatsapp"></i> تواصل سريع عبر واتس اب
-    
-    </button>
-
-    <!-- أيقونات السوشال -->
-    <div class="social-icons" style="margin-top: 20px;">
-        <a href="#"><i class="bi bi-facebook"></i></a>
-        <a href="#"><i class="bi bi-twitter"></i></a>
-        <a href="#"><i class="bi bi-linkedin"></i></a>
-        <a href="#"><i class="bi bi-instagram"></i></a>
-    </div>
-</div>
+            <div class="footer-column">
+                <h5>{{ __('messagess.Join Us For Latest Offers') }}</h5>
+                
+                <div class="subscription-form" style="justify-content: center;">
+                    <div class="input-wrapper">
+                        <input type="tel" class="subscription-input" placeholder="+966" id="phoneInput" dir="ltr">
+                        <button class="join-btn" onclick="joinOffers()">{{ __('messagess.Join') }}</button>
+                    </div>
+                </div>
+            
+                <button class="whatsapp-btn full-width" onclick="subscribeWhatsApp()">
+                    <i class="bi bi-whatsapp"></i> {{ __('messagess.Quick WhatsApp Contact') }}
+                </button>
+            </div>
 <style>
     .input-wrapper {
     position: relative;
@@ -506,7 +498,6 @@
 
             <!-- Copyright -->
             <div class="footer-copyright">
-                <p>© 2025 جميع الحقوق محفوظة</p>
             </div>
         </div>
     </footer>
