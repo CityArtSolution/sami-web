@@ -24,6 +24,7 @@
             min-height: 100vh;
             display: flex;
             justify-content: center;
+            align-items: center;
             padding: 50px 0;
         }
 
@@ -35,16 +36,23 @@
             background: #F8F8F8;
             border-radius: 15px;
             overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .sub-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.1);
         }
 
         .style-box {
             width: 50%;
             height: 58%;
-            background: #CF9233;
+            background: linear-gradient(135deg, #CF9233, #B67A24);
             position: absolute;
             left: -25%;
             top: -172px;
             rotate: 318deg;
+            filter: brightness(1.1);
         }
 
         .content {
@@ -56,28 +64,48 @@
 
         .section {
             max-width: 700px;
-            background: #fff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            background: linear-gradient(145deg, #fff, #fdf6e3);
+            padding: 35px 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
             text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
         }
 
         .section h2 {
-            font-size: 22px;
-            font-weight: bold;
-            margin-bottom: 10px;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
             color: #c48b16;
         }
 
         .section ul {
             list-style: none;
             padding: 0;
+            margin-bottom: 20px;
         }
 
         .section ul li {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 10px;
+        }
+
+        .section ul li i {
+            color: #CF9233;
+            font-size: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        .section ul li:hover i {
+            transform: scale(1.3);
         }
 
         .affiliate-link {
@@ -87,28 +115,32 @@
             font-weight: 600;
             text-decoration: none;
             font-size: 16px;
-            transition: 0.3s;
+            transition: all 0.3s ease;
         }
 
         .affiliate-link:hover {
             color: #b67a24;
+            transform: translateX(5px);
         }
 
         .gold-btn {
-            background: #cf9233;
+            background: linear-gradient(135deg, #CF9233, #B67A24);
             border-radius: 50px;
-            padding: 12px 25px;
+            padding: 14px 25px;
             border: none;
             color: #fff;
-            font-size: 17px;
+            font-size: 18px;
             font-weight: bold;
-            transition: 0.3s;
+            transition: all 0.3s ease;
             width: 100%;
+            margin-top: 15px;
         }
 
         .gold-btn:hover {
-            background: #b67a24;
+            background: linear-gradient(135deg, #B67A24, #CF9233);
             color:#fff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
         }
 
         @media (max-width: 992px) {
@@ -119,7 +151,7 @@
             }
             .style-box { display: none; }
             .content { width: 100%; }
-            .section { padding: 20px; }
+            .section { padding: 25px; }
         }
     </style>
 </head>
@@ -142,16 +174,16 @@
 
                     <h2>مميزات الانضمام:</h2>
                     <ul>
-                        <li><i class="fa fa-check text-warning"></i> عمولة على كل عملية شراء عبر رابطك</li>
-                        <li><i class="fa fa-check text-warning"></i> لوحة تحكم خاصة لعرض الأرباح</li>
-                        <li><i class="fa fa-check text-warning"></i> روابط تتبع خاصة بك</li>
-                        <li><i class="fa fa-check text-warning"></i> إمكانية طلب سحب الأرباح بسهولة</li>
+                        <li><i class="fa fa-check"></i> عمولة على كل عملية شراء عبر رابطك</li>
+                        <li><i class="fa fa-check"></i> لوحة تحكم خاصة لعرض الأرباح</li>
+                        <li><i class="fa fa-check"></i> روابط تتبع خاصة بك</li>
+                        <li><i class="fa fa-check"></i> إمكانية طلب سحب الأرباح بسهولة</li>
                     </ul>
 
                     <form action="{{ route('frontend.become.affiliate.submit') }}" method="POST">
                         @csrf
                         <button type="submit" class="gold-btn">
-                            <i class="fa-solid fa-user-plus"></i> تحويل حسابي لمسوق الآن
+                            <i class="fa-solid fa-user-plus me-2"></i> تحويل حسابي لمسوق الآن
                         </button>
                     </form>
 
