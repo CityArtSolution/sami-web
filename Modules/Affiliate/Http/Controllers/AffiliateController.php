@@ -22,12 +22,12 @@ class AffiliateController extends Controller
         $availableEarnings = $affiliate->wallet_available;
 
         // --------- TOP LINKS ----------
-        $topLinks = $affiliate->visitors()
-            ->selectRaw('ref_url, COUNT(*) as total')
-            ->groupBy('ref_url')
-            ->orderByDesc('total')
-            ->limit(5)
-            ->get();
+        // $topLinks = $affiliate->visitors()
+        //     ->selectRaw('ref_url, COUNT(*) as total')
+        //     ->groupBy('ref_url')
+        //     ->orderByDesc('total')
+        //     ->limit(5)
+        //     ->get();
 
         // --------- CHART: LAST 30 DAYS ----------
         $stats = $affiliate->visitors()
@@ -58,7 +58,7 @@ class AffiliateController extends Controller
             'totalConversions',
             'totalEarnings',
             'availableEarnings',
-            'topLinks',
+            // 'topLinks',
             'chartLabels',
             'chartData',
             'lastConversions'
