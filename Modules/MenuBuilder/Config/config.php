@@ -340,6 +340,48 @@ return [
         //     'order' => 28,
         //     'status' => 0,
         // ],
+
+        [
+            'title' => 'sidebar.affiliate',
+            'menu_item_type' => 'parent',
+            'start_icon' => 'fa-solid fa-handshake',
+            'permission' => [],
+            'order' => 30,
+            'children' => [
+                [
+                    'title' => 'affiliate.statistics',
+                    'route' => 'affiliate.statistics',
+                    'active' => ['affiliate/statistics'],
+                    'start_icon' => 'fa-solid fa-chart-line',
+                    'menu_level' => 1,
+                    'order' => 0,
+                ],
+                [
+                    'title' => 'affiliate.members',
+                    'route' => 'affiliate.members',
+                    'active' => ['affiliate/members'],
+                    'start_icon' => 'fa-solid fa-users',
+                    'menu_level' => 1,
+                    'order' => 1,
+                ],
+                [
+                    'title' => 'affiliate.conversions',
+                    'route' => 'affiliate.conversions',
+                    'active' => ['affiliate/conversions'],
+                    'start_icon' => 'fa-solid fa-arrows-rotate',
+                    'menu_level' => 1,
+                    'order' => 2,
+                ],
+                [
+                    'title' => 'affiliate.withdrawals',
+                    'route' => 'affiliate.withdrawals',
+                    'active' => ['affiliate/withdrawals'],
+                    'start_icon' => 'fa-solid fa-money-bill-transfer',
+                    'menu_level' => 1,
+                    'order' => 3,
+                ],
+            ],
+        ],
     ],
     'H_ARRAY_MENU' => [
         [
@@ -745,4 +787,6 @@ return [
             'title' => 'Access Control',
         ],
     ],
+
+
 ];

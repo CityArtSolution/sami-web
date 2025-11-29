@@ -375,7 +375,7 @@ class FrontendController extends Controller
         $user = auth()->user();
 
         if ($user->affiliate && $user->affiliate->status === 'active') {
-             return redirect()->back()
+             return redirect()->route('affiliate.dashboard')
                 ->with('info', 'أنت بالفعل مسوّق لدينا');
         }
 

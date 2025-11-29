@@ -1,6 +1,5 @@
 <?php
 
-use Modules\Affiliate\Http\Controllers\AffiliateController;
 
     use App\Http\Controllers\Backend\BackendController;
     use App\Http\Controllers\Backend\BackupController;
@@ -47,6 +46,7 @@ use Modules\Affiliate\Http\Controllers\AffiliateController;
     use Modules\World\Models\City;
     use Illuminate\Support\Facades\Storage;
     use App\Http\Controllers\TapPaymentController;
+    use Modules\Affiliate\Http\Controllers\AffiliateAdminController;
 
 Route::get('/test-upload', function () {
     Storage::disk('public')->put('test.txt', 'hello from laravel');
@@ -397,14 +397,15 @@ Route::get('lang/{locale}', function ($locale) {
     Route::post('/booking/cancel/{id}', [SignController::class, 'destroy_myBooking'])->name('myBooking.destroy');
 
     Route::get('/complate-bookings', [SignController::class, 'complateBookings'])->name('profile.complateBokkings');
+
     Route::middleware(['auth'])
         ->prefix('app/affiliate')
-        ->name('admin.affiliate.')
+        ->name('affiliate.')
         ->group(function () {
-            Route::get('/dashboard', [AffiliateController::class, 'dashboard'])->name('dashboard');
-            Route::get('/members', [AffiliateController::class, 'members'])->name('members');
-            Route::get('/conversions', [AffiliateController::class, 'conversions'])->name('conversions');
-            Route::get('/withdrawals', [AffiliateController::class, 'withdrawals'])->name('withdrawals');
+            Route::get('/statistics', [AffiliateAdminController::class, 'dashboard'])->name('statistics');
+            Route::get('/members', [AffiliateAdminController::class, 'members'])->name('members');
+            Route::get('/conversions', [AffiliateAdminController::class, 'conversions'])->name('conversions');
+            Route::get('/withdrawals', [AffiliateAdminController::class, 'withdrawals'])->name('withdrawals');
     });
     Route::middleware(['auth'])->group(function () {
         Route::get('/app/gift', [GiftController::class, 'index'])->name('app.gift');

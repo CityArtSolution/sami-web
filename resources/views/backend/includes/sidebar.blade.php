@@ -135,49 +135,6 @@
                     </a>
                 </li>
 
-                /// affiliate
-                {{-- <li class="nav-item {{ request()->routeIs('affiliate.dashboard') ? 'active' : '' }}">
-                    <a href="{{ route('affiliate.dashboard') }}" class="nav-link">
-                        <i class="fa-solid fa-chart-line"></i>
-                        <span class="item-name">Affiliate Dashboard</span>
-                    </a>
-                </li>
-
-                <li class="nav-item {{ request()->routeIs('affiliate.members') ? 'active' : '' }}">
-                    <a href="{{ route('affiliate.members') }}" class="nav-link">
-                        <i class="fa-solid fa-users"></i>
-                        <span class="item-name">Affiliates</span>
-                    </a>
-                </li>
-
-                <li class="nav-item {{ request()->routeIs('affiliate.links') ? 'active' : '' }}">
-                    <a href="{{ route('affiliate.links') }}" class="nav-link">
-                        <i class="fa-solid fa-link"></i>
-                        <span class="item-name">Links Builder</span>
-                    </a>
-                </li>
-
-                <li class="nav-item {{ request()->routeIs('affiliate.conversions') ? 'active' : '' }}">
-                    <a href="{{ route('affiliate.conversions') }}" class="nav-link">
-                        <i class="fa-solid fa-arrows-rotate"></i>
-                        <span class="item-name">Conversions</span>
-                    </a>
-                </li>
-
-                <li class="nav-item {{ request()->routeIs('affiliate.withdrawals') ? 'active' : '' }}">
-                    <a href="{{ route('affiliate.withdrawals') }}" class="nav-link">
-                        <i class="fa-solid fa-money-bill-transfer"></i>
-                        <span class="item-name">Withdrawals</span>
-                    </a>
-                </li>
-
-                <li class="nav-item {{ request()->routeIs('affiliate.settings') ? 'active' : '' }}">
-                    <a href="{{ route('affiliate.settings') }}" class="nav-link">
-                        <i class="fa-solid fa-gear"></i>
-                        <span class="item-name">Commission Settings</span>
-                    </a>
-                </li> --}}
-
             </ul>
         </div>
     </div>
