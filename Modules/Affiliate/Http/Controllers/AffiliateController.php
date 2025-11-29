@@ -52,7 +52,7 @@ class AffiliateController extends Controller
             ->limit(5)
             ->get();
 
-        return view('affiliate.dashboard', compact(
+        return view('affiliate::dashboard', compact(
             'affiliate',
             'totalVisitors',
             'totalConversions',
@@ -98,7 +98,7 @@ class AffiliateController extends Controller
             $conversionData[] = $conversionsStats[$date] ?? 0;
         }
 
-        return view('affiliate.stats', compact(
+        return view('affiliate::stats', compact(
             'affiliate',
             'visitorLabels',
             'visitorData',
@@ -114,6 +114,6 @@ class AffiliateController extends Controller
             ->latest()
             ->paginate(20);
 
-        return view('affiliate.conversions', compact('affiliate', 'conversions'));
+        return view('affiliate::conversions', compact('affiliate', 'conversions'));
     }
 }
