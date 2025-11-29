@@ -56,7 +56,7 @@ class FrontendController extends Controller
             ->get();
 
         // Fetch Wheel homepage
-        $prizes = Wheel::pluck('reward_value');             
+        $prizes = Wheel::pluck('reward_value');
 
         return view('frontend::index', compact('services', 'categories', 'packages' , 'products' , 'prizes'));
     }
@@ -79,9 +79,9 @@ class FrontendController extends Controller
     $ad = Ad::select('pack_bannar')->latest()->first();
 
     $packages = Package::with([
-        'service', 
-        'service.services', 
-        'media', 
+        'service',
+        'service.services',
+        'media',
         'branch' // أضفنا علاقة الفرع
     ])
     ->where('status', 1)
@@ -98,7 +98,7 @@ class FrontendController extends Controller
     public function Ouroffers()
     {
         $pages = Ouroffersection::where('end_date', '>', Carbon::now())->get();
-        
+
         return view('frontend::Ouroffers',['pages' => $pages]);
     }
 
@@ -107,7 +107,7 @@ class FrontendController extends Controller
         $terms = Term::all();
         return view('frontend::TermsAndConditions' , compact('terms'));
     }
-    
+
     /**
      * Display the services page.
      */
@@ -145,7 +145,7 @@ class FrontendController extends Controller
     public function shop()
     {
         $ad = Ad::select('shop_bannar')->latest()->first();
-        
+
             // Fetch active products for the homepage
     $categories = ProductCategory::with(['products' => function ($q) {
         $q->where('products.status', 1)
@@ -173,7 +173,7 @@ class FrontendController extends Controller
      */
     public function categoryDetails($id)
     {
-        
+
         // return 0;
         $category = Category::with(['services' => function($query) {
                 $query->where('status', 1);
@@ -187,7 +187,7 @@ class FrontendController extends Controller
             ->whereNull('parent_id')
             ->take(4)
             ->get();
-        
+
                 // Fetch active categories for the homepage
         $allCat = Category::where('status', 1)
             ->whereNull('parent_id')
