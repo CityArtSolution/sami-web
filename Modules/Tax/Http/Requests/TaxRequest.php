@@ -4,7 +4,7 @@ namespace Modules\Tax\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class taxRequest extends FormRequest
+class TaxRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.

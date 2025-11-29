@@ -28,10 +28,16 @@ Route::group(['prefix' => ''], function () {
     Route::get('/TermsAndConditions', [FrontendController::class, 'TermsAndConditions'])->name('frontend.TermsAndConditions');
     Route::get('/Packages', [FrontendController::class, 'Packages'])->name('frontend.Packages');
     Route::get('/Shop', [FrontendController::class, 'Shop'])->name('frontend.Shop');
-    
     Route::group(['prefix' => 'payment'], function () {
         Route::get('/', [PaymentController::class, 'index'])->name('paymentMethods');
-        
+
     });
 
+    Route::middleware('auth')->group(function () {
+        Route::get('/become-affiliate', [FrontendController::class, 'becomeAffiliate'])
+            ->name('frontend.become.affiliate');
+
+        Route::post('/become-affiliate', [FrontendController::class, 'activateAffiliate'])
+            ->name('frontend.become.affiliate.submit');
+    });
 });

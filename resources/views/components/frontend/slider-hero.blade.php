@@ -12,7 +12,7 @@
 .content{
     direction: rtl;
     width: 70%;
-    border: 3px dashed #cf9233; 
+    border: 3px dashed #cf9233;
     min-height: 57%;
     display: flex;
 }
@@ -82,7 +82,7 @@
         @if(app()->getLocale() == 'en')
             height: 35%;
         @endif
-        
+
     }
     .text-content {
         justify-content: flex-start;
@@ -121,5 +121,5 @@
             <p style="color:white;font-size: 16px;margin: 0 13px;"><img style="width: 15px;" src="{{ asset('images/icons/Vector (2).png') }}" > {{ __('messagess.book_now') }}</p>
         </a>
         </div>
-    </div>    
+    </div>
 </div>

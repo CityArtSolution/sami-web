@@ -128,7 +128,7 @@
     a {
             text-decoration-line: none;
     }
-    .mob-btn{ 
+    .mob-btn{
         height: 45px;
     }
     .mob-nav{
@@ -148,72 +148,72 @@
         <div class="logo"><a href="/"> <img src="{{asset('images/samilogo.png')}}"></a></div>
         <div class="links">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-flex align-items-center gap-4" style="margin-right: 22px;flex-direction: row;white-space: nowrap;z-index: 999999;">
-      
+
                     <li class="nav-item h5">
                         <a class="nav-link text-white {{ request()->routeIs('frontend.home') ? 'text-active' : '' }}"
-                           href="{{ route('frontend.home') }}">    
-                            {{ __('messagess.nav_home') }} 
+                           href="{{ route('frontend.home') }}">
+                            {{ __('messagess.nav_home') }}
                         </a>
                     </li>
-    
+
                     <li class="nav-item h5">
                         <a class="nav-link text-white {{ request()->routeIs('frontend.about') ? 'text-active' : '' }}"
                            href="{{ route('frontend.about') }}">
                             {{ __('messagess.nav_about') }}
                         </a>
                     </li>
-    
+
                     <li class="nav-item h5">
                         <a class="nav-link text-white {{ request()->routeIs('frontend.services') ? 'text-active' : '' }}"
                            href="{{ route('frontend.services') }}">
                             {{ __('messagess.nav_services') }}
                         </a>
                     </li>
-    
+
                     <li class="nav-item h5">
                         <a class="nav-link text-white {{ request()->routeIs('frontend.Packages') ? 'text-active' : '' }}"
                            href="{{ route('frontend.Packages') }}">
                             {{ __('messagess.nav_package') }}
                         </a>
                     </li>
-                    
+
                     <li class="nav-item h5">
                         <a class="nav-link text-white {{ request()->routeIs('frontend.Ouroffers') ? 'text-active' : '' }}"
                            href="{{ route('frontend.Ouroffers') }}">
                             {{ __('messagess.our_offers') }}
                         </a>
                     </li>
-                    
+
                     <li class="nav-item h5">
                         <a class="nav-link text-white {{ request()->routeIs('frontend.Shop') ? 'text-active' : '' }}"
                            href="{{ route('frontend.Shop') }}">
                             {{ __('messagess.store') }}
                         </a>
-                    </li> 
-                    
+                    </li>
+
                     <li class="nav-item h5">
                         <a class="nav-link text-white {{ request()->routeIs('gift.page') ? 'text-active' : '' }}"
                            href="{{ route('gift.page') }}">
                            {{ __('messagess.gift_cards') }}
                         </a>
                     </li>
-                    
+
                     <li class="nav-item h5">
                         <a class="nav-link text-white {{ request()->routeIs('frontend.branches') ? 'text-active' : '' }}"
                            href="{{ route('frontend.branches') }}">
                             {{ __('messagess.our_branches') }}
                         </a>
                     </li>
-    
+
                     <li class="nav-item h5">
                         <a class="nav-link text-white {{ request()->routeIs('frontend.contact') ? 'text-active' : '' }}"
                            href="{{ route('frontend.contact') }}">
                             {{ __('messagess.nav_contact') }}
                         </a>
                     </li>
-        
+
                     <li  class="nav-item h5">
-                        <a href="{{ route('language.switch', 'en') }}" style="color:#cf9233;text-decoration-line: none;">English</a> | 
+                        <a href="{{ route('language.switch', 'en') }}" style="color:#cf9233;text-decoration-line: none;">English</a> |
                         <a href="{{ route('language.switch', 'ar') }}" style="color:#cf9233;text-decoration-line: none;">العربية</a>
                     </li>
                 </ul>
@@ -237,15 +237,16 @@
             <div class="icon-text">{{ __('messagess.nav_cart') }}</div>
         </div>
         </a>
+
     </div>
-    
+
         <div class="loyalty">
             <a href="{{route('home.loyalety')}}" class="more-btn-nav">
                 <p style="color:#cf9233 ;font-size: 16px;margin: 0 13px;"> <img style="width: 22px;margin: 0 7px;" src="{{ asset('images/icons/basil-present-outline-11.svg') }}" > {{ __('messagess.loyalty_points') }}</p>
             </a>
         </div>
     </div>
-    
+
     <!-- زرار فتح المينيو -->
     <div class="mob-nav">
         <button class="btn mob-btn d-lg-none" style="margin-top: 12px;" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-controls="mobileMenu">
@@ -260,7 +261,7 @@
             </a>
         </div>
     </div>
-    
+
     <!-- المينيو الجانبي -->
     <div class="offcanvas offcanvas-start bg-white " tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
       <div class="offcanvas-header">
@@ -316,7 +317,7 @@
             </a>
          </li>
          <li  class="nav-item">
-            <a href="{{ route('language.switch', 'en') }}" style="color:#cf9233;text-decoration-line: none;">English</a> | 
+            <a href="{{ route('language.switch', 'en') }}" style="color:#cf9233;text-decoration-line: none;">English</a> |
             <a href="{{ route('language.switch', 'ar') }}" style="color:#cf9233;text-decoration-line: none;">العربية</a>
          </li>
              <div class="settings d-flex justify-content-center align-items-center gap-4" style="width: 100% !important;height: 100% !important;margin-top: 22px !important;">

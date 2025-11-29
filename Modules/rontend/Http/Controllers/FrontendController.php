@@ -2,14 +2,15 @@
 
 namespace Modules\Frontend\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
+use App\Models\Wheel;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Modules\Service\Models\Service;
-use Modules\Category\Models\Category;
 use Modules\Package\Models\Package;
-use App\Models\Wheel;
+use Modules\Service\Models\Service;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
+use Modules\Category\Models\Category;
+use Modules\Affiliate\Models\Affiliate;
 
 class FrontendController extends Controller
 {
@@ -121,7 +122,7 @@ class FrontendController extends Controller
 
         return view('frontend::service-details', compact('service', 'relatedServices'));
     }
-    
+
     /**
      * Display the contact page.
      */
@@ -273,4 +274,37 @@ class FrontendController extends Controller
             'message' => 'Package details retrieved successfully'
         ]);
     }
+    public function becomeAffiliate()
+    {
+        $user = auth()->user();
+
+        if ($user->affiliate && $user->affiliate->status === 'active') {
+             return redirect()->back()
+                ->with('info', 'أنت بالفعل مسوّق لدينا');
+        }
+
+        return view('frontend::become-affiliate');
+    }
+
+    public function activateAffiliate()
+    {
+        $user = auth()->user();
+
+        if ($user->affiliate) {
+             $user->affiliate->update([
+                'status' => 'active'
+            ]);
+            return redirect()->back()->with('info', 'أنت بالفعل مسوّق.');
+
+        }else {
+            $user->affiliate()->create([
+                'user_id' => $user->id,
+                'status'   => 'active',
+            ]);
+        }
+        return redirect()->route('affiliate.dashboard')
+            ->with('success', 'تم تحويل حسابك إلى مسوّق بنجاح');
+    }
+
+
 }

@@ -63,8 +63,7 @@ Route::get('/test-upload', function () {
     |
     */
     Route::post('/staff/working-hours/{id}', [EmployeesController::class, 'store_working_houer'])->name('staff.working-hours.store');
-    
-    // About Bookings
+ // About Bookings
 
     Route::get('/loyalety' , [LoyaltyController::class , 'loyalety'])->name('home.loyalety');
 
@@ -73,8 +72,7 @@ Route::get('/test-upload', function () {
     Route::get('/sms-messages', [TaqnyatSmsController::class, 'index'])->name('app.sms');
     Route::post('/store', [TaqnyatSmsController::class, 'store'])->name('store');
     Route::post('/send-test', [TaqnyatSmsController::class, 'sendTestMessage'])->name('send-test');
-    
-    // TAP
+ // TAP
     Route::get('/pay', [TapPaymentController::class, 'checkout'])->name('tap.pay');
     Route::get('/payment/callback', [TapPaymentController::class, 'callback'])->name('tap.callback');
 
@@ -89,30 +87,16 @@ Route::get('/test-upload', function () {
 
     // Sign
     Route::get('/signup', [SignController::class, 'index'])->name('signup');
-    
-    Route::post('/signup', [SignController::class, 'store'])->name('signup.store');
-    
-    Route::get('/signin', [SignController::class, 'login'])->name('signin');
-    
-    // Route::post('/signin', [SignController::class, 'verify'])->name('signin.verify');
-    
-    Route::post('/signin/verify', [SignController::class, 'verify'])->name('signin.verify');
-    
-    Route::get('/giffte' , [GiftCardController::class, 'index'])->name('gift.page');
-    
-    // Import
-    
-    Route::post('/import-services', [ServiceController::class, 'import'])->name('import.services');// uploude <= موقت هنا 
-    
-    Route::post('/import-staff', [ServiceController::class, 'import_staff'])->name('import.staff');// uploude <= موقت هنا 
-    
-    Route::post('/import-city', [ServiceController::class, 'import_city'])->name('import.city');// uploude <= موقت هنا 
-
- 
+ Route::post('/signup', [SignController::class, 'store'])->name('signup.store');
+ Route::get('/signin', [SignController::class, 'login'])->name('signin');
+ // Route::post('/signin', [SignController::class, 'verify'])->name('signin.verify');
+ Route::post('/signin/verify', [SignController::class, 'verify'])->name('signin.verify');
+ Route::get('/giffte' , [GiftCardController::class, 'index'])->name('gift.page');
+ // Import
+ Route::post('/import-services', [ServiceController::class, 'import'])->name('import.services');// uploude <= موقت هنا Route::post('/import-staff', [ServiceController::class, 'import_staff'])->name('import.staff');// uploude <= موقت هنا Route::post('/import-city', [ServiceController::class, 'import_city'])->name('import.city');// uploude <= موقت هنا
     Route::middleware('user.auth')->group(function () {
 
-        
-        Route::get('/admin/contact-messages', [ContactMessageController::class, 'index'])->name('contact.index');
+ Route::get('/admin/contact-messages', [ContactMessageController::class, 'index'])->name('contact.index');
         Route::post('/admin/contact-messages/{id}/reply', [ContactMessageController::class, 'reply'])->name('admin.contact-messages.reply');
         Route::post('/admin/contact-messages/bulk-action', [ContactMessageController::class, 'bulkAction'])->name('admin.contact-messages.bulk-action');
         Route::post('/contact', [ContactMessageController::class, 'store'])->name('contact.store');
@@ -139,12 +123,10 @@ Route::get('/test-upload', function () {
     Route::post('/cart', [BookingCartController::class, 'store'])->name('cart.store');
 
     Route::delete('/cart/{id}', [BookingCartController::class, 'destroy'])->name('cart.destroy');
-    
-    Route::delete('/cart/destroy/All', [BookingCartController::class, 'destroy_All'])->name('cart.destroyAll');
+ Route::delete('/cart/destroy/All', [BookingCartController::class, 'destroy_All'])->name('cart.destroyAll');
 
     Route::post('/cart-pay', [BookingCartController::class, 'cartPay'])->name('cart.payment');
-    
-    Route::get('/loyalty-points/check', [BookingCartController::class, 'checkLoyaltyPoints'])->name('loyalty.check');
+ Route::get('/loyalty-points/check', [BookingCartController::class, 'checkLoyaltyPoints'])->name('loyalty.check');
 
     // Profile
     Route::get('/profile', [SignController::class, 'profile'])->name('profile');
@@ -152,9 +134,7 @@ Route::get('/test-upload', function () {
     Route::post('/logout', [SignController::class, 'logout'])->name('logout');
 
 
-    }); 
-
- 
+    });
     Route::get('/service-groups', [HomeBookingController::class, 'getServiceGroups']);
     Route::get('/services/{serviceGroupId}/{branchId}/bookings', [HomeBookingController::class, 'getServicesByGroup']);
     Route::get('/staff', [HomeBookingController::class, 'index']);
@@ -178,9 +158,7 @@ Route::get('lang/{locale}', function ($locale) {
     Route::get('/clear-config', function () {
         Artisan::call('config:clear');
         return 'Config cache cleared!';
-    });          
-
-    // Clear application cache
+    });lear application cache
     Route::get('/clear-cache', function () {
         Artisan::call('cache:clear');
         return 'Application cache cleared!';
@@ -389,41 +367,38 @@ Route::get('lang/{locale}', function ($locale) {
     });
 
     Route::get('/my-bookings', [SignController::class, 'myBookings'])->name('profile.my_bookings');
-    
-    Route::get('/coupon', [SignController::class, 'coupon'])->name('profile.coupon');
-            
-    Route::post('/booking/cancel/{id}', [SignController::class, 'destroy_myBooking'])->name('myBooking.destroy');
+ Route::get('/coupon', [SignController::class, 'coupon'])->name('profile.coupon');
+post('/booking/cancel/{id}', [SignController::class, 'destroy_myBooking'])->name('myBooking.destroy');
 
     Route::get('/complate-bookings', [SignController::class, 'complateBookings'])->name('profile.complateBokkings');
-
+    Route::middleware(['auth'])
+        ->prefix('app/affiliate')
+        ->name('admin.affiliate.')
+->group(function () {
+            Route::get('/dashboard', [AffiliateController::class, 'dashboard'])->name('dashboard');
+            Route::get('/members', [AffiliateController::class, 'members'])->name('members');
+            Route::get('/conversions', [AffiliateController::class, 'conversions'])->name('conversions');
+            Route::get('/withdrawals', [AffiliateController::class, 'withdrawals'])->name('withdrawals');
+    });
     Route::middleware(['auth'])->group(function () {
         Route::get('/app/gift', [GiftController::class, 'index'])->name('app.gift');
-        
-        Route::get('/app/invoice', [InvoiceController::class, 'index'])->name('app.invoice');
+ Route::get('/app/invoice', [InvoiceController::class, 'index'])->name('app.invoice');
         Route::get('/app/loyalty', [LoyaltyController::class, 'index'])->name('app.loyalty');
         Route::get('/app/Offerspages', [offersController::class, 'index'])->name('app.offers');
         Route::get('/app/ads/', [AdsController::class, 'index'])->name('app.ads');
         Route::get('/app/reject/', [RejectController::class, 'index'])->name('app.reject');
         Route::get('/app/TermsAndConditions', [TermsAndConditionsController::class, 'index'])->name('app.TermsAndConditions');
         Route::get('/app/Wheel/settings', [WheelController::class, 'index'])->name('app.Wheel');
-        
-        Route::post('/app/Wheel/settings/store', [WheelController::class, 'store'])->name('Wheel.store');
+
+     Route::post('/app/Wheel/settings/store', [WheelController::class, 'store'])->name('Wheel.store');
         Route::post('/app/reject/store', [RejectController::class, 'store'])->name('app.store');
         Route::post('/app/loyalty/store', [LoyaltyController::class, 'store'])->name('loyalty.store');
         Route::post('/app/ads/store', [AdsController::class, 'store'])->name('ads.store');
-        Route::post('/app/TermsAndConditions/store', [TermsAndConditionsController::class, 'store'])->name('TermsAndConditions.store');
+Route::post('/app/TermsAndConditions/store', [TermsAndConditionsController::class, 'store'])->name('TermsAndConditions.store');
         Route::post('/app/Offerspages/store', [offersController::class, 'store'])->name('ouroffersections.store');
-        Route::get('/validate-coupon', [InvoiceController::class, 'validateCoupon']);// about serves 
+        Route::get('/validate-coupon', [InvoiceController::class, 'validateCoupon']);// about serves
         Route::get('/validate-invoice-coupon', [InvoiceController::class, 'validateInvoiceCoupon']);
-        
+
 
         Route::put('/TermsAndConditions/{id}/update', [TermsAndConditionsController::class, 'update'])->name('TermsAndConditions.update');
-        Route::put('/reject/update/{id}', [RejectController::class, 'update']);
-        
-        Route::delete('/app/Wheel/settings/destroy/{id}', [WheelController::class, 'destroy'])->name('Wheel.destroy');
-        Route::delete('/app/Wheel/settings/destroy_all', [WheelController::class, 'destroy_all'])->name('Wheel.destroy_all');
-        Route::get('/TermsAndConditions/{id}', [TermsAndConditionsController::class, 'destroy'])->name('TermsAndConditions.destroy');
-        Route::get('/invoices/{id}', [InvoiceController::class, 'destroy'])->name('invoices.destroy');
-        Route::get('/reject/{id}', [RejectController::class, 'destroy'])->name('reject.destroy');
-        Route::get('/gift/delete/{id}', [GiftController::class, 'destroy'])->name('gift.delete');
-    });
+       

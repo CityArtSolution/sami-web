@@ -64,8 +64,8 @@
             background-size: 16px 12px;
             border: var(--bs-border-width) solid var(--bs-border-color);
             border-radius: var(--bs-border-radius);
-            transition: border-color .15s 
-        ease-in-out, box-shadow .15s 
+            transition: border-color .15s
+        ease-in-out, box-shadow .15s
         ease-in-out;
         }
         .form-control {
@@ -235,6 +235,12 @@
                 <a href="#" class="" style=" z-index: 2; padding: 6px 8px; border-radius: 50%;" data-bs-toggle="modal" data-bs-target="#editProfileModal">
                     <i class="fas fa-edit"></i>
                 </a>
+                <a href="{{ route('affiliate.become') }}"
+                    class="btn btn-warning"
+                    style="width: 194px;height: 43px;border-radius: 31px;
+                            background:#CF9233;border:none;color:white;font-weight:bold;">
+                    <i class="fa-solid fa-bullhorn"></i> مسوّق معنا
+                </a>
                 <form method="POST" action="{{ route('logout') }}">
                 @csrf
                     <button type="submit" class="btn logout-btn" style="width: 194px;height: 43px;border-radius: 31px;"  title="{{__('profile.logout')}}"><i class="fa-solid fa-right-from-bracket"></i>  {{ __('messages.logout') }} </button>
@@ -243,7 +249,7 @@
         </div>
         </div>
     </div>
-    
+
     <div class="stats-box">
         <div class="stat-item">
           <h6> <span class="stat-icon"><img src="{{ asset('images/icons/vesa.png') }}"></span>{{ __('profile.wallet') }}</h6>
@@ -276,7 +282,7 @@
             </a>
         </div>
   </div>
- 
+
     <!-- Modal -->
     <div class="modal fade" id="depositModal" tabindex="-1" aria-labelledby="depositModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
@@ -302,7 +308,7 @@
     </div>
 
 
- 
+
      <div class="row" style="width: 87%;margin: 40px auto 60px auto;">
     <!-- القسم الأيسر (جدول المعاملات) -->
     <div class="col-lg-8 mb-4">
@@ -312,25 +318,25 @@
             <h5>{{ __('profile.service') }}</h5>
             <h5>{{ __('profile.service_location') }}</h5>
             <h5>{{ __('profile.date') }}</h5>
-            <h5>{{ __('profile.service_status') }}</h5>            
+            <h5>{{ __('profile.service_status') }}</h5>
         </div>
         @forelse($bookings as $booking)
         <div class="table-content">
             @foreach($booking->services as $service)
-                <h5>{{ $service->service_name ?? '---' }}</h5>            
+                <h5>{{ $service->service_name ?? '---' }}</h5>
                 <h5>{{ $booking->branch->name ?? '---' }}</h5>
                 <h5>{{ \Carbon\Carbon::parse($booking->start_date_time)->format('Y-m-d') }}</h5>
                 @if($booking->status == 'pending')
-                    <h5 style="color:#F7F316">{{ __('messagess.booked') }}</h5>            
+                    <h5 style="color:#F7F316">{{ __('messagess.booked') }}</h5>
                 @endif
                 @if($booking->status == 'completed')
-                    <h5 style="color:#1FAF38">{{ __('messagess.completed') }}</h5>            
+                    <h5 style="color:#1FAF38">{{ __('messagess.completed') }}</h5>
                 @endif
                 @if($booking->status == 'cancelled')
-                    <h5 style="color:#FF473E">{{ __('messagess.cancelled') }}</h5>            
+                    <h5 style="color:#FF473E">{{ __('messagess.cancelled') }}</h5>
                 @endif
             @endforeach
-        </div> 
+        </div>
         @empty
             <h5 style="position: absolute;color: #979797;">{{ __('profile.no_bookings') }}</h5>
         @endforelse
@@ -358,7 +364,7 @@
       </div>
     </div>
   </div>
-  
+
     <div class="modal fade" style="z-index: 999999999999999999999;" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <form method="POST" action="{{ route('profile.update' , auth()->user()->id) }}" enctype="multipart/form-data" id="profileEditForm">
@@ -418,17 +424,17 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    
+
       <script>
       document.addEventListener("DOMContentLoaded", function () {
           @if(session('success'))
                 createNotify({ title: '', desc: "{{ session('success') }}" });
           @endif
-  
+
           @if(session('error'))
                 createNotify({ title: '', desc: "{{ session('error') }}" });
           @endif
-  
+
           @if($errors->any())
               @foreach($errors->all() as $error)
                     createNotify({ title: '', desc: "{{ $error }}" });

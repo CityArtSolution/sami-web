@@ -26,6 +26,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\Permission\Traits\HasRoles;
 use Modules\Wallet\Models\Wallet;
 use Modules\BussinessHour\Models\Shift;
+use Modules\Affiliate\Models\Affiliate;
 
 class User extends Authenticatable implements HasMedia, MustVerifyEmail
 {
@@ -303,5 +304,15 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
     public function wallet()
     {
         return $this->hasOne(Wallet::class);
+    }
+
+    public function affiliate()
+    {
+        return $this->hasOne(Affiliate::class);
+    }
+
+    public function isAffiliate()
+    {
+        return $this->affiliate && $this->affiliate->status === 'active';
     }
 }

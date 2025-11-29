@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Package\Database\factories\UserPackageServicesFactory;
 
-class userPackageServices extends Model
+class UserPackageServices extends Model
 {
     use HasFactory;
 

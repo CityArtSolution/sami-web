@@ -16,7 +16,7 @@
             </a>
         </div>
         <div class="sidebar-toggle" data-toggle="sidebar" data-active="true">
-            <i class="icon">  
+            <i class="icon">
                 <svg class="icon-20" width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M4.25 12.2744L19.25 12.2744" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                     <path d="M10.2998 18.2988L4.2498 12.2748L10.2998 6.24976" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -30,14 +30,14 @@
 @php
     $menu = new \App\Http\Middleware\GenerateMenus();
     $menu = $menu->handle('menu', 'vertical', 'ARRAY_MENU');
-    
+
     $filteredItems = $menu->roots()->filter(function($item) {
         $hiddenItems = [
-            'staff_earnings', 'أرباح', 'earnings',     
-            'staffs_payouts', 'مدفوعات', 'payouts',    
-            'reviews', 'التقييمات', 'review'           
+            'staff_earnings', 'أرباح', 'earnings',
+            'staffs_payouts', 'مدفوعات', 'payouts',
+            'reviews', 'التقييمات', 'review'
         ];
-        
+
         foreach ($hiddenItems as $hidden) {
             if (str_contains(strtolower($item->title), strtolower($hidden))) {
                 return false;
@@ -48,7 +48,7 @@
 @endphp
 
 @include(config('laravel-menu.views.bootstrap-items'), ['items' => $filteredItems])
-                                
+
                 <!-- عنصر ثابت مخصص -->
                 <li class="nav-item {{ request()->routeIs('app.invoice') ? 'active' : '' }}">
                     <a href="{{ route('app.invoice') }}" class="nav-link {{ request()->routeIs('app.invoice') ? 'active' : '' }}">
@@ -126,6 +126,7 @@
                         <span class="item-name">{{ __('messages.TermsAndConditions') }}</span>
                     </a>
                 </li>
+
                 <!-- عنصر ثابت مخصص -->
                 <li class="nav-item {{ request()->routeIs('app.sms') ? 'active' : '' }}">
                     <a href="{{ route('app.sms') }}" class="nav-link {{ request()->routeIs('app.sms') ? 'active' : '' }}">
@@ -133,7 +134,50 @@
                         <span class="item-name">{{ __('messages.sms') }}</span>
                     </a>
                 </li>
-                
+
+                /// affiliate
+                <li class="nav-item {{ request()->routeIs('affiliate.dashboard') ? 'active' : '' }}">
+                    <a href="{{ route('affiliate.dashboard') }}" class="nav-link">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <span class="item-name">Affiliate Dashboard</span>
+                    </a>
+                </li>
+
+                <li class="nav-item {{ request()->routeIs('affiliate.members') ? 'active' : '' }}">
+                    <a href="{{ route('affiliate.members') }}" class="nav-link">
+                        <i class="fa-solid fa-users"></i>
+                        <span class="item-name">Affiliates</span>
+                    </a>
+                </li>
+
+                <li class="nav-item {{ request()->routeIs('affiliate.links') ? 'active' : '' }}">
+                    <a href="{{ route('affiliate.links') }}" class="nav-link">
+                        <i class="fa-solid fa-link"></i>
+                        <span class="item-name">Links Builder</span>
+                    </a>
+                </li>
+
+                <li class="nav-item {{ request()->routeIs('affiliate.conversions') ? 'active' : '' }}">
+                    <a href="{{ route('affiliate.conversions') }}" class="nav-link">
+                        <i class="fa-solid fa-arrows-rotate"></i>
+                        <span class="item-name">Conversions</span>
+                    </a>
+                </li>
+
+                <li class="nav-item {{ request()->routeIs('affiliate.withdrawals') ? 'active' : '' }}">
+                    <a href="{{ route('affiliate.withdrawals') }}" class="nav-link">
+                        <i class="fa-solid fa-money-bill-transfer"></i>
+                        <span class="item-name">Withdrawals</span>
+                    </a>
+                </li>
+
+                <li class="nav-item {{ request()->routeIs('affiliate.settings') ? 'active' : '' }}">
+                    <a href="{{ route('affiliate.settings') }}" class="nav-link">
+                        <i class="fa-solid fa-gear"></i>
+                        <span class="item-name">Commission Settings</span>
+                    </a>
+                </li>
+
             </ul>
         </div>
     </div>
