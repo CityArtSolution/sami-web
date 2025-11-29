@@ -235,12 +235,7 @@
                 <a href="#" class="" style=" z-index: 2; padding: 6px 8px; border-radius: 50%;" data-bs-toggle="modal" data-bs-target="#editProfileModal">
                     <i class="fas fa-edit"></i>
                 </a>
-                <a href="{{ route('frontend.become.affiliate') }}"
-                    class="btn btn-warning"
-                    style="width: 194px;height: 43px;border-radius: 31px;
-                            background:#CF9233;border:none;color:white;font-weight:bold;">
-                    <i class="fa-solid fa-bullhorn"></i> مسوّق معنا
-                </a>
+
                 <form method="POST" action="{{ route('logout') }}">
                 @csrf
                     <button type="submit" class="btn logout-btn" style="width: 194px;height: 43px;border-radius: 31px;"  title="{{__('profile.logout')}}"><i class="fa-solid fa-right-from-bracket"></i>  {{ __('messages.logout') }} </button>
@@ -248,6 +243,16 @@
             </div>
         </div>
         </div>
+    </div>
+    <div class="text-center mb-4">
+        <a href="{{ route('frontend.become.affiliate') }}"
+        style="color: #CF9233;
+                font-weight: 600;
+                text-decoration: none;
+                font-size: 16px;">
+            <i class="fa-solid fa-handshake me-1"></i>
+            انضم إلى برنامج الشركاء
+        </a>
     </div>
 
     <div class="stats-box">
