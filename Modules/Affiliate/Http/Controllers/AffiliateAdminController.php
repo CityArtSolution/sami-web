@@ -55,10 +55,10 @@ class AdminAffiliateController extends Controller
         return view('affiliate::admin.conversions', compact('conversions'));
     }
 
-    public function withdrawals(Request $request)
-    {
-        $withdrawals = \DB::table('affiliate_withdrawals')->latest()->paginate(20);
+    // public function withdrawals(Request $request)
+    // {
+    //     $withdrawals = \DB::table('affiliate_withdrawals')->latest()->paginate(20);
 
-        return view('affiliate.admin.withdrawals', compact('withdrawals'));
-    }
+    //     return view('affiliate.admin.withdrawals', compact('withdrawals'));
+    // }
 }
