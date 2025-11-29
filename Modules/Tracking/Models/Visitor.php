@@ -10,6 +10,7 @@ use Modules\Tracking\Database\factories\VisitorFactory;
 class Visitor extends Model
 {
     use HasFactory;
+    protected $table = 'affiliate_visitors';
 
     protected $fillable = [
         'affiliate_id',

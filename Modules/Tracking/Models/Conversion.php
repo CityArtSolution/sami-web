@@ -10,7 +10,7 @@ use Modules\Tracking\Database\factories\ConversionFactory;
 class Conversion extends Model
 {
     use HasFactory;
-
+    protected $table = 'affiliate_conversions';
     /**
      * The attributes that are mass assignable.
      */
