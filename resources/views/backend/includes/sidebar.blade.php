@@ -136,7 +136,7 @@
                 </li>
 
                 /// affiliate
-                <li class="nav-item {{ request()->routeIs('affiliate.dashboard') ? 'active' : '' }}">
+                {{-- <li class="nav-item {{ request()->routeIs('affiliate.dashboard') ? 'active' : '' }}">
                     <a href="{{ route('affiliate.dashboard') }}" class="nav-link">
                         <i class="fa-solid fa-chart-line"></i>
                         <span class="item-name">Affiliate Dashboard</span>
@@ -176,7 +176,7 @@
                         <i class="fa-solid fa-gear"></i>
                         <span class="item-name">Commission Settings</span>
                     </a>
-                </li>
+                </li> --}}
 
             </ul>
         </div>
