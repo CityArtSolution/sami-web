@@ -274,37 +274,4 @@ class FrontendController extends Controller
             'message' => 'Package details retrieved successfully'
         ]);
     }
-    public function becomeAffiliate()
-    {
-        $user = auth()->user();
-
-        if ($user->affiliate && $user->affiliate->status === 'active') {
-             return redirect()->back()
-                ->with('info', 'أنت بالفعل مسوّق لدينا');
-        }
-
-        return view('frontend::become-affiliate');
-    }
-
-    public function activateAffiliate()
-    {
-        $user = auth()->user();
-
-        if ($user->affiliate) {
-             $user->affiliate->update([
-                'status' => 'active'
-            ]);
-            return redirect()->back()->with('info', 'أنت بالفعل مسوّق.');
-
-        }else {
-            $user->affiliate()->create([
-                'user_id' => $user->id,
-                'status'   => 'active',
-            ]);
-        }
-        return redirect()->route('affiliate.dashboard')
-            ->with('success', 'تم تحويل حسابك إلى مسوّق بنجاح');
-    }
-
-
 }
