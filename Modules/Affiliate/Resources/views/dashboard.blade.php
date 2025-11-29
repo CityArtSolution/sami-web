@@ -61,7 +61,7 @@
 
 {{-- ===== TOP LINKS ===== --}}
 <div class="row mt-4">
-    <div class="col-lg-6">
+    {{-- <div class="col-lg-6">
         <div class="card card-block">
             <div class="card-header">
                 <h5>أفضل الروابط</h5>
@@ -79,7 +79,7 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     {{-- LAST CONVERSIONS --}}
     <div class="col-lg-6">
