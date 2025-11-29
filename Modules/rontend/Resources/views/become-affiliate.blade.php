@@ -19,11 +19,11 @@
         :root {
             --primary-gold: #CF9233;
             --dark-gold: #B67A24;
+            --light-gold-accent: #fdf5e6; /* لون ذهبي فاتح جداً للخلفيات الهادئة */
             --background-color: #F8F8F8;
             --card-background: #FFFFFF;
             --shadow-light: rgba(0, 0, 0, 0.05);
-            --shadow-medium: rgba(0, 0, 0, 0.1);
-            --transition-speed: 0.4s;
+            --transition-speed: 0.3s; /* سرعة انتقال أبطأ وأكثر هدوءاً */
         }
 
         body {
@@ -32,7 +32,7 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            color: #333; /* لون نص أساسي داكن */
+            color: #333;
         }
 
         .container-page {
@@ -46,42 +46,47 @@
         /* --- Global Card Styling --- */
         .sub-container {
             position: relative;
-            max-width: 900px; /* جعل الحاوية أصغر وأكثر تركيزاً */
+            max-width: 900px;
             width: 100%;
             background: var(--card-background);
-            border-radius: 25px; /* حواف أكثر دائرية */
+            border-radius: 20px; /* حواف أقل دائرية قليلاً */
             overflow: hidden;
-            box-shadow: 0 15px 45px var(--shadow-light); /* ظل ناعم كأنه يطفو */
+            box-shadow: 0 10px 30px var(--shadow-light); /* ظل أخف وأكثر هدوءاً */
             transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
             display: flex;
-            flex-direction: column; /* ليكون المحتوى داخله عموديًا */
+            flex-direction: column;
         }
 
+        /* تخفيف تأثير التحريك */
         .sub-container:hover {
-            transform: translateY(-10px); /* تأثير الطفو أقوى */
-            box-shadow: 0 25px 60px var(--shadow-medium);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
         }
 
-        /* --- Header/Style Box Enhancement --- */
+        /* --- Header/Style Box Enhancement (New Style) --- */
         .style-header {
             width: 100%;
-            padding: 40px 30px;
-            background: linear-gradient(150deg, var(--primary-gold) 0%, var(--dark-gold) 100%);
-            color: #fff;
+            padding: 50px 30px; /* زيادة التباعد الرأسي للجمل */
+            /* تدرج لوني أكثر نعومة: يبدأ بلون ذهبي فاتح وينتهي بالذهبي الأساسي */
+            background: linear-gradient(150deg, var(--light-gold-accent) 0%, var(--primary-gold) 100%);
+            color: #333; /* تغيير لون النص ليكون داكناً على الخلفية الفاتحة */
             text-align: center;
-            border-bottom: 5px solid rgba(255, 255, 255, 0.2); /* فاصل جمالي */
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* خط فاصل ناعم */
         }
 
         .style-header h2 {
-            font-size: 36px;
-            font-weight: 900;
-            margin-bottom: 5px;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            font-size: 38px;
+            font-weight: 800;
+            margin-bottom: 15px; /* زيادة المسافة بين العنوان والفقرة */
+            color: #000; /* جعل العنوان أسود لتباين قوي */
+            text-shadow: none; /* إزالة الظل */
         }
 
         .style-header p {
-            font-size: 18px;
-            opacity: 0.9;
+            font-size: 19px;
+            opacity: 1; /* جعل النص واضحاً */
+            color: #555;
+            margin-top: 15px; /* مسافة إضافية للجملة */
         }
 
 
@@ -95,7 +100,7 @@
         }
 
         .section {
-            max-width: 600px; /* لتركيز المحتوى في المنتصف */
+            max-width: 600px;
             width: 100%;
             text-align: right;
         }
@@ -103,7 +108,7 @@
         .section h3 {
             font-size: 24px;
             font-weight: 700;
-            margin-bottom: 20px;
+            margin-bottom: 25px; /* زيادة المسافة */
             color: var(--dark-gold);
             border-bottom: 2px solid var(--primary-gold);
             padding-bottom: 10px;
@@ -113,7 +118,7 @@
         .section ul {
             list-style: none;
             padding: 0;
-            margin-bottom: 35px;
+            margin-bottom: 40px; /* زيادة المسافة قبل الزر */
         }
 
         .section ul li {
@@ -128,9 +133,10 @@
             color: #555;
         }
 
+        /* تخفيف تأثير التحريك */
         .section ul li:hover {
-            background-color: #fff7e6; /* خلفية خفيفة عند التمرير */
-            transform: translateX(-5px);
+            background-color: var(--light-gold-accent);
+            transform: none; /* إلغاء حركة التحريك الجانبي */
         }
 
 
@@ -143,24 +149,25 @@
         /* --- Button Styling --- */
         .gold-btn {
             background: linear-gradient(45deg, var(--primary-gold), var(--dark-gold));
-            border-radius: 12px; /* جعل الحواف أقل دائرية لتكون عصرية */
+            border-radius: 10px;
             padding: 16px 30px;
             border: none;
             color: #fff;
             font-size: 20px;
             font-weight: 700;
-            transition: all var(--transition-speed) cubic-bezier(0.165, 0.84, 0.44, 1);
+            transition: all var(--transition-speed) ease; /* تغيير الانتقال ليكون أهدأ */
             width: 100%;
             margin-top: 20px;
-            box-shadow: 0 10px 20px rgba(191, 147, 51, 0.3);
+            box-shadow: 0 5px 15px rgba(191, 147, 51, 0.3); /* ظل أقل بروزاً */
             text-transform: uppercase;
         }
 
+        /* تخفيف تأثير التحريك */
         .gold-btn:hover {
             background: linear-gradient(45deg, var(--dark-gold), var(--primary-gold));
             color:#fff;
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 15px 30px rgba(191, 147, 51, 0.5);
+            transform: translateY(-2px); /* حركة رفع خفيفة جداً */
+            box-shadow: 0 8px 20px rgba(191, 147, 51, 0.4);
             cursor: pointer;
         }
 
@@ -169,7 +176,7 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            margin-top: 25px;
+            margin-top: 30px;
             color: var(--dark-gold);
             font-weight: 600;
             text-decoration: none;
@@ -177,22 +184,20 @@
             transition: all 0.3s ease;
         }
 
+        /* تخفيف تأثير التحريك */
         .affiliate-link:hover {
             color: var(--primary-gold);
-            transform: scale(1.05);
+            transform: none;
+            text-decoration: underline;
         }
 
         /* --- Mobile Adjustments --- */
         @media (max-width: 768px) {
-            .sub-container {
-                border-radius: 15px;
-                max-width: 95%;
-            }
+            .sub-container { border-radius: 15px; max-width: 95%; }
+            .style-header { padding: 40px 20px; }
             .style-header h2 { font-size: 30px; }
-            .style-header p { font-size: 16px; }
+            .style-header p { font-size: 17px; }
             .content { padding: 30px 20px; }
-            .section h3 { font-size: 22px; }
-            .section ul li { font-size: 16px; }
             .gold-btn { font-size: 18px; padding: 14px 25px; }
         }
     </style>
