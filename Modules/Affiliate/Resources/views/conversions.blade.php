@@ -1,4 +1,4 @@
-@extends('affiliate.layouts.master')
+@extends('affiliate::layouts.master')
 
 @section('title', 'التحويلات')
 

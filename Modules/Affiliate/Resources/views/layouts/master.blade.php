@@ -100,6 +100,23 @@
         </div>
     </div>
 
+     <div class="main-content wrapper">
+        <div
+            class="position-relative pr-hide @hasPermission('menu_builder_sidebar')
+                    {{ !isset($isBanner) ? 'iq-banner' : '' }} default
+                    @endhasPermission">
+            <!-- Header -->
+            @include('backend.includes.header')
+            <!-- /Header -->
+            @if (!isset($isBanner))
+                <!-- Header Banner Start-->
+                @hasPermission('menu_builder_sidebar')
+                    @include('components.partials.sub-header')
+                @endhasPermission
+                <!-- Header Banner End-->
+            @endif
+        </div>
+
     {{-- ===================== --}}
     {{--     MAIN CONTENT      --}}
     {{-- ===================== --}}
