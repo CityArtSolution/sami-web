@@ -235,7 +235,7 @@
                 <a href="#" class="" style=" z-index: 2; padding: 6px 8px; border-radius: 50%;" data-bs-toggle="modal" data-bs-target="#editProfileModal">
                     <i class="fas fa-edit"></i>
                 </a>
-                <a href="{{ route('affiliate.become') }}"
+                <a href="{{ route('frontend.become.affiliate') }}"
                     class="btn btn-warning"
                     style="width: 194px;height: 43px;border-radius: 31px;
                             background:#CF9233;border:none;color:white;font-weight:bold;">
